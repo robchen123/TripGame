@@ -1,0 +1,11 @@
+{
+    "jscodehints.detectedExclusions": [
+        "D:/workbase/family/www/app/app.js",
+        "D:/workbase/family/platforms/android/assets/www/sea.js",
+        "D:/workbase/family/www/sea.js",
+        "D:/workbase/family/www/sea.config.js",
+        "D:/workbase/family/www/spa/widget/scroller.js",
+        "D:/workbase/family/www/spa/widget/listview.js",
+        "D:/workbase/family/www/app/module/user.js"
+    ]
+}

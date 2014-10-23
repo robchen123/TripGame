@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+.off-canvas-wrap, .off-canvas-wrap .inner-wrap {
+    height: 100%;
+}
+
+.user-logo {
+    width: 80%;
+    margin: 0.2em;
+}
+
+.user-info {    
+    color: #fff;
+}
