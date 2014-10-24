@@ -1,14 +1,44 @@
 @charset "utf-8";
 
+#page {
+    margin-top: 2rem;
+}
+
 .off-canvas-wrap, .off-canvas-wrap .inner-wrap {
     height: 100%;
 }
 
 .user-logo {
-    width: 80%;
-    margin: 0.2em;
+
 }
 
 .user-info {    
     color: #fff;
+}
+
+ul.feedlist {
+    list-style: none;
+    height: 26rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.img-wrapper {
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.img-wrapper.small {
+    width: 3rem;
+    height: 3rem;
+}
+
+.img-wrapper.normal {
+    width: 6rem;
+    height: 6rem;
+}
+
+.img-wrapper.large {
+    width: 12rem;
+    height: 12rem;
 }

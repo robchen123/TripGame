@@ -1,33 +1,9 @@
 define('app/module/user', function(require){
     var $ = require('$'),
+        runtime = require('spa/core/runtime'),
         notification = navigator.notification;
     
     var UserModule = {
-        user: null,
-        islogin: false,
-        init: function(){
-            this.getUser();
-        },
-        setUser: function(user){
-            if(!user){
-                return;    
-            }
-            localStorage.user = JSON.stringify(user);
-            this.user = user;
-            this.islogin = true;
-        },
-        getUser: function(){
-            if(!this.user){
-                try{
-                    var user = JSON.parse(localStorage.user);
-                    this.setUser(user);
-                }catch(_){}
-            }
-            return this.user;
-        },
-        isLogin: function(){
-            return this.islogin;
-        },
         register: function(data, success, error){
             var user = new AV.User();
             user.set("username", data.phone);
@@ -35,7 +11,6 @@ define('app/module/user', function(require){
             user.setMobilePhoneNumber(data.phone);
             user.signUp(null, {
                 success: function(user){
-                    _this.setUser(user);
                     success();
                 }, 
                 error: function(user, rs){
@@ -54,11 +29,10 @@ define('app/module/user', function(require){
                 pwd = data.pwd;
             AV.User.logIn(username, pwd, {
                 success: function(user){
-                    _this.setUser(user);
                     success(user);
+                    $(runtime).trigger('user_login');
                 }, 
                 error: function(user, rs){
-                    console.log(rs.code);
                     switch(rs.code){
                         case 210:
                             notification.alert('用户名或密码错误', '登陆失败');
@@ -73,13 +47,10 @@ define('app/module/user', function(require){
             });
         },
         logout: function(){
-            this.user = null;
-            localStorage.user = null;
-            this.islogin = false;
+            AV.User.logOut();
+            $(runtime).trigger('user_logout');
         }
     }
-                       
-    UserModule.init();
     
     return UserModule;
 });

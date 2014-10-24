@@ -6,6 +6,11 @@
         "D:/workbase/family/www/sea.config.js",
         "D:/workbase/family/www/spa/widget/scroller.js",
         "D:/workbase/family/www/spa/widget/listview.js",
-        "D:/workbase/family/www/app/module/user.js"
+        "D:/workbase/family/www/app/module/user.js",
+        "D:/workbase/family/www/spa/widget/clearout.js",
+        "D:/workbase/family/www/spa/module/cookie.js",
+        "D:/workbase/family/www/spa/core/basepage.js",
+        "D:/workbase/family/www/spa/lib/template.js",
+        "D:/workbase/family/www/spa/core/tploader.js"
     ]
 }

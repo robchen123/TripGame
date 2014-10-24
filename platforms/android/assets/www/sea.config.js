@@ -8,5 +8,8 @@ seajs.config({
         'config': 'app/config/config.develop'
     },
     preload: ['$'],
-    debug: true
+    debug: true,
+    map: [
+        [".js", ".js?" + new Date().getTime()]
+      ]
 });

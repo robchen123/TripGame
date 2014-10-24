@@ -3,17 +3,14 @@
  **/
 define('app/app', function (require) {
     var $ = require('$'),
+        runtime = require('spa/core/runtime'),
         config = require('config'),
         dispatcher = require('spa/core/dispatcher');
+    require('app/hook/hooks');
     
     AV.initialize(config.APPID, config.APPKEY);
-    
-    $(document).foundation({
-        offcanvas : {
-            open_method: 'move',
-            close_on_click : true
-        }
-    });
-    
+    console.log(123);
     dispatcher.init(config);
+    console.log(223);
+    
 });

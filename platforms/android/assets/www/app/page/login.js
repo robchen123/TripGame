@@ -16,9 +16,7 @@ define('app/page/login', function(require){
         page.bind('#loginForm', 'submit', function(){
             var phone = $('#phone').val(),
                 pwd = $('#pwd').val();
-            UserModule.login({phone: phone, pwd: pwd}, function(){
-                page.redirect({id: 'feed'});
-            });
+            UserModule.login({phone: phone, pwd: pwd}, function(){});
             return false;
         });
     }

@@ -10,12 +10,7 @@ define('app/page/index', function(require){
 	});
 	
 	page.actionIndex = function(){
-		if(User.isLogin()){
-            this.redirect({id: 'feed', action: 'index'}); 
-        }else{
-            //$('#sideMenuCtrl').hide();
-            this.redirect({id: 'login', action: 'login'});
-        } 
+		
 	}
 	
 	return page;
