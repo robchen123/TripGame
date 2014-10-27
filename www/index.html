@@ -8,53 +8,31 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
     <link rel="stylesheet" href="lib/foundation/css/foundation.min.css" />
+    <link rel="stylesheet" href="lib/foundation-icons/foundation-icons.css" />
     <link rel="stylesheet" href="app/styles/css/main.css" />
     <title>Demo</title>
 </head>
 
 <body>
-    <div class="off-canvas-wrap" data-offcanvas>
-      <div class="inner-wrap">
-        <nav class="tab-bar">
-          <section class="left-small" id="sideMenuCtrl">
-            <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
-          </section>
-
-          <section class="middle tab-bar-section">
-            <h1 class="title" id="page-title">Demo</h1>
-          </section>
-        </nav>
-
-        <aside class="left-off-canvas-menu">
-            <div class="row">
-                <div class="small-6 columns">
-                    <div class="img-wrapper normal">
-                        <a href="#user/profile">
-                            <img class="user-logo" src="app/styles/images/logo.png" />
-                        </a>
-                    </div>
-                </div>
-                <div class="user-info small-6 columns">
-                    <span>hello</span>
-                </div>
-            </div>
-            <ul class="off-canvas-list">
-            <li><a href="#member">成员</a></li>
-            <li><a href="#feed">动态</a></li>
-            <li><a href="#chat">会议室</a></li>
-            <li><a href="#event">活动</a></li>
-            <li><a href="#login/logout">注销</a></li>
-            <li><a href="#login/exit">退出</a></li>
-          </ul>
-        </aside>
-
-        <section class="main-section">
-          <div id="page" class="container-fluid"></div>
-        </section>
-
-      <a class="exit-off-canvas"></a>
-
-      </div>
+    <div class="row">
+        <div id="page" class="small-12 columns"></div>
+    </div>
+    <div class="icon-bar five-up" id="main-nav">
+        <a class="item" href="#feed">
+            <i class="fi-home"></i>
+        </a>
+        <a class="item" href="#user">
+            <i class="fi-torso"></i>
+        </a>
+        <a class="item" href="#map">
+            <i class="fi-marker"></i>
+        </a>
+        <a class="item" href="#message">
+            <i class="fi-mail"></i>
+        </a>
+        <a class="item" href="#setting">
+            <i class="fi-widget"></i>
+        </a>
     </div>
     
     <script type="text/javascript" src="sea.js"></script>

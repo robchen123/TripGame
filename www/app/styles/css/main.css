@@ -1,11 +1,15 @@
 @charset "utf-8";
 
-#page {
-    margin-top: 2rem;
+#main-nav {
+    position: fixed;
+    bottom: 0;
+    line-height: 1rem;
 }
 
-.off-canvas-wrap, .off-canvas-wrap .inner-wrap {
-    height: 100%;
+#page {
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #eee;
 }
 
 .user-logo {
@@ -14,13 +18,6 @@
 
 .user-info {    
     color: #fff;
-}
-
-ul.feedlist {
-    list-style: none;
-    height: 26rem;
-    overflow-x: hidden;
-    overflow-y: scroll;
 }
 
 .img-wrapper {
@@ -41,4 +38,40 @@ ul.feedlist {
 .img-wrapper.large {
     width: 12rem;
     height: 12rem;
+}
+
+ul.list {
+    list-style:none;
+    margin-top: 1rem;
+    margin-left: 0;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background-color: #fff;
+}
+
+ul.list li {
+    line-height: 3rem;
+    border-bottom: 1px solid #ccc;
+}
+
+ul.list li.last {
+    border: none;
+}
+
+ul.list p {
+    font-size: 0.8rem;
+    margin: 0;
+    line-height: 1.8rem;
+    color: #999
+}
+ul.list .feed-content {
+    padding-left: 0;
+}
+
+.feed-content .time, .feed-content .city, .feed-content i {
+    color: #008cba;
+}
+
+.feed-content .msg {
+    color: #666;
 }

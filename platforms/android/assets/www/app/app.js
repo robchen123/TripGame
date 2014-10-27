@@ -9,8 +9,5 @@ define('app/app', function (require) {
     require('app/hook/hooks');
     
     AV.initialize(config.APPID, config.APPKEY);
-    console.log(123);
     dispatcher.init(config);
-    console.log(223);
-    
 });

@@ -1,3 +1,98 @@
 <!--TEMPLATE_START:feed-->
-<span>feed</span>
+<!--TEMPLATE_START:feed_index-->
+<ul class="list">
+    <li>
+        <div class="row">
+            <div class="small-10 columns">
+                <dl class="sub-nav" style="line-height:1.5rem">
+                  <dd class="active"><a href="#feed/index">全部</a></dd>
+                  <dd><a href="#feed/near">最近</a></dd>
+                </dl>
+            </div>
+            <div class="small-2 columns">
+                <a href="#feed/new" style="font-size:1.4rem"><i class="fi-plus"></i></a>
+            </div>
+        </div>
+    </li>
+    <%for(var i = 0, l = feeds.length; i < l; i ++){%>
+    <li>
+        <div class="row">
+            <div class="small-3 columns">
+                <a href="#user/info/<%=feeds[i].get('user').get('username')%>">
+                    <img src="<%=feeds[i].get('user').get('logo').url()%>" />
+                </a>
+            </div>
+            <div class="small-9 columns feed-content">
+                <p><a href="#"><%=feeds[i].get('user').get('nickname')%></a><br/> 于 <span class="time"><%=feeds[i].get('time')%></span> 到 <span class="city"><%=feeds[i].get('city')%></span> <i class="fi-marker"></i></p>
+                <p class="msg">“<%=feeds[i].get('desc')%>”</p>
+            </div>
+        </div>
+    </li>
+    <% } %>
+</ul>
+<!--TEMPLATE_END:feed_index-->
+
+<!--TEMPLATE_START:feed_near-->
+<ul class="list">
+    <li>
+        <div class="row">
+            <div class="small-10 columns">
+                <dl class="sub-nav" style="line-height:1.5rem">
+                  <dd class="active"><a href="#feed/index">全部</a></dd>
+                  <dd><a href="#feed/near">最近</a></dd>
+                </dl>
+            </div>
+            <div class="small-2 columns">
+                <a href="#feed/new" style="font-size:1.4rem"><i class="fi-plus"></i></a>
+            </div>
+        </div>
+    </li>
+    <%for(var i = 0, l = feeds.length; i < l; i ++){%>
+    <li>
+        <div class="row">
+            <div class="small-3 columns">
+                <a href="#user/info/<%=feeds[i].get('user').get('username')%>">
+                    <img src="<%=feeds[i].get('user').get('logo').url()%>" />
+                </a>
+            </div>
+            <div class="small-9 columns feed-content">
+                <p><a href="#"><%=feeds[i].get('user').get('nickname')%></a><br/> 于 <span class="time"><%=feeds[i].get('time')%></span> 到 <span class="city"><%=feeds[i].get('city')%></span> <i class="fi-marker"></i></p>
+                <p class="msg">“<%=feeds[i].get('desc')%>”</p>
+            </div>
+        </div>
+    </li>
+    <% } %>
+</ul>
+<!--TEMPLATE_END:feed_near-->      
+            
+            
+<!--TEMPLATE_START:feed_new-->
+<form id="feedForm">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="small-12 columns">
+            <label>时间
+                <select id="time">
+                    <% for(var i = 0, l = days.length; i <l; i ++){ %>
+                    <option value="<%=days[i]%>"<%if(i==0){%> selected="selected"<%}%>><%=days[i]%></option>
+                    <% } %>
+                </select>
+            </label>
+        </div>
+        <div class="small-12 columns">
+            <label>地点
+                <input type="text" placeholder="地点" id="city" />
+            </label>
+        </div>
+        <div class="small-12 columns">
+            <label>要求
+                <textarea placeholder="要求" id="desc"></textarea>
+            </label>
+        </div>
+        <div class="small-12 columns">
+            <button type="submit" id="btnSubmit" class="expand">提交</button>
+        </div>
+    </div>
+</form>
+<!--TEMPLATE_END:feed_new-->
 <!--TEMPLATE_END:feed-->

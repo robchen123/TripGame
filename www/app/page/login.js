@@ -26,9 +26,5 @@ define('app/page/login', function(require){
         this.redirect({action: 'login'});
     }
     
-    page.actionExit = function(){
-        navigator.app.exitApp();
-    }
-	
 	return page;
 });

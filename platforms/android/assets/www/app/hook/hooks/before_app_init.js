@@ -8,4 +8,8 @@ define('app/hook/hooks/before_app_init', function(require){
             close_on_click : true
         }
     });
+    
+    $(document).ready(function(){
+        $('#page').height($(window).height() - $('#main-nav').height());    
+    });
 });
