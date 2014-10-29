@@ -3,7 +3,8 @@ define('app/page/feed', function(require){
         Page = require('spa/core/basepage'),
         BaiduAPI = require('app/module/baiduapi'),
         UserModule = require('app/module/user'),
-        topnav = require('app/widget/topnav');
+        topnav = require('app/widget/topnav'),
+        cache = require('app/module/cache');
     
     var page = new Page({
         id: 'feed',
@@ -18,49 +19,70 @@ define('app/page/feed', function(require){
     
     page.actionIndex = function(params, done){
         topnav.setButton('right', 'add', 'feed/new');
-        var Feed = AV.Object.extend('Feed'),
-            query = new AV.Query(Feed);
-        query.descending('time');
-        query.include('user');
-        query.limit(100);
-        query.find().then(function(rs){
-            done({feeds: rs});
-        });
+        var feeds = cache.get(cache.KEYS.FEEDS);
+        if(feeds){
+            console.log(feeds);
+            done({feeds: feeds});
+        }else{
+            var Feed = AV.Object.extend('Feed'),
+                query = new AV.Query(Feed);
+            query.descending('time');
+            query.include('user');
+            query.limit(100);
+            query.find().then(function(rs){
+                cache.set(cache.KEYS.FEEDS, rs, 86400000);
+                done({feeds: cache.get(cache.KEYS.FEEDS)});
+            });
+        }
     }
     
     page.actionNear = function(params, done){
         topnav.setButton('right', 'add', 'feed/new');
         if(!UserModule.checkLogin()){
-            return false;    
+            return false;
         }
-        navigator.geolocation.getCurrentPosition(function(position){
+        
+        var position = cache.get(cache.KEYS.POSITION);
+        if(!position){
+            navigator.notification.alert('正在获取您的当前位置，请稍后重试', '提示');
+            return false;
+        }
+        var feeds = cache.get(cache.KEYS.NEAR_FEEDS);
+        if(feeds){
+            done({feeds: feeds});    
+        }else{
             var Feed = AV.Object.extend('Feed'),
-                query = new AV.Query(Feed);
-                query.include('user');
-                query.near('location', new AV.GeoPoint(position.coords));
-                query.find().then(function(rs){
-                    done({feeds: rs});
-                });
-        }, function(){
-            navigator.noticifation.alert('无法获取您的当前位置');    
-        });
+            query = new AV.Query(Feed);
+            query.include('user');
+            query.near('location', new AV.GeoPoint(position));
+            query.find().then(function(rs){
+                cache.set(cache.KEYS.NEAR_FEEDS, rs, 86400000);
+                done({feeds: cache.get(cache.KEYS.NEAR_FEEDS)});
+            });
+        }
     }
     
     page.actionMy = function(params, done){
         topnav.setButton('right', 'add', 'feed/new');
         if(!UserModule.checkLogin()){
-            return false;    
+            return false;
         }
-        var Feed = AV.Object.extend('Feed'),
-            query = new AV.Query(Feed);
-        query.descending('createdAt');
-        query.equalTo('user', AV.User.current());
-        query.include('location');
-        query.include('user');
-        query.limit(100);
-        query.find().then(function(rs){
-            done({feeds: rs});
-        });
+        var feeds = cache.get(cache.KEYS.MY_FEEDS);
+        if(!params.refresh && feeds){
+            done({feeds: feeds});
+        }else{
+            var Feed = AV.Object.extend('Feed'),
+                query = new AV.Query(Feed);
+            query.descending('createdAt');
+            query.equalTo('user', AV.User.current());
+            query.include('location');
+            query.include('user');
+            query.limit(100);
+            query.find().then(function(rs){
+                cache.set(cache.KEYS.MY_FEEDS, rs, 86400000);
+                done({feeds: cache.get(cache.KEYS.MY_FEEDS)});
+            });
+        }
     }
     
     page.actionPos = function(params, done){
@@ -119,6 +141,7 @@ define('app/page/feed', function(require){
                     feed.set('city', city);
                     feed.set('desc', desc);
                     feed.save().then(function(){
+                        cache.clear(cache.KEYS.MY_FEEDS);
                         page.redirect({action: 'my'});
                     }, function(error){
                         navigator.notification.alert("Error: " + error.code + " " + error.message, '错误');    

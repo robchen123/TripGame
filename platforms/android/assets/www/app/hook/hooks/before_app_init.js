@@ -1,6 +1,7 @@
 define('app/hook/hooks/before_app_init', function(require){
     var $ = require('$'),
-        config = require('config');
+        config = require('config'),
+        cache = require('app/module/cache');
     
     $(document).foundation({
         offcanvas : {
@@ -14,5 +15,12 @@ define('app/hook/hooks/before_app_init', function(require){
         FastClick.attach(document.body);
     });
     
+    document.addEventListener('deviceready', function(){
+        navigator.geolocation.getCurrentPosition(function(position){
+            cache.set(cache.KEYS.POSITION, position.coords, 86400000 * 30);
+        }, function(){
+            navigator.noticifation.alert('无法获取您的当前位置，系统将使用您上次的定位位置', '提示');    
+        });
+    });
     
 });

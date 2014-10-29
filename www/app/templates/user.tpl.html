@@ -44,15 +44,19 @@
 <!--TEMPLATE_END:user_profile-->
     
 <!--TEMPLATE_START:user_info-->
+<div class="row">&nbsp;</div>
 <div class="row">
     <div class="small-6 columns">
         <img src="<%=user.get('logo').url()%>" />
     </div>
     <div class="small-6 columns">
-        <span><%=user.get('nickname')%></span>
+        <div><%=user.get('nickname')%></div>
+        <div><a href="#">发消息</a></div>
+        <div><a href="#"><i class="fi-like"></i></a></div>
     </div>
 </div>
-<ul class="small-block-grid-2" id="photolist">
+<div class="row">&nbsp;</div>
+<ul class="small-block-grid-4" id="photolist">
     <% for(var i = 0, l = photos.length; i < l; i ++){ %>
     <li><img class="th" src="<%=photos[i].get('img').url()%>"></li>
     <% } %>

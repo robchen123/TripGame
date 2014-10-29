@@ -54,6 +54,7 @@ D:\workbase\family\platforms\android\assets\www\app\hook\hooks\after_app_init.js
 D:\workbase\family\platforms\android\assets\www\app\hook\hooks\before_app_init.js \
 D:\workbase\family\platforms\android\assets\www\app\hook\hooks\user_login.js \
 D:\workbase\family\platforms\android\assets\www\app\module\baiduapi.js \
+D:\workbase\family\platforms\android\assets\www\app\module\cache.js \
 D:\workbase\family\platforms\android\assets\www\app\module\user.js \
 D:\workbase\family\platforms\android\assets\www\app\page\feed.js \
 D:\workbase\family\platforms\android\assets\www\app\page\index.js \
