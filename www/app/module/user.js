@@ -49,6 +49,14 @@ define('app/module/user', function(require){
         logout: function(){
             AV.User.logOut();
             $(runtime).trigger('user_logout');
+        },
+        checkLogin: function(){
+            if(AV.User.current()){
+                return true; 
+            }else{
+                runtime.env.page.redirect({id: 'login', action: 'login', back: location.hash.replace(/^#/, '')});
+                return false;
+            }
         }
     }
     

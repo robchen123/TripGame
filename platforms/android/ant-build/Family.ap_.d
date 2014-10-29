@@ -69,6 +69,7 @@ D:\workbase\family\platforms\android\assets\www\app\templates\index.tpl.html \
 D:\workbase\family\platforms\android\assets\www\app\templates\login.tpl.html \
 D:\workbase\family\platforms\android\assets\www\app\templates\setting.tpl.html \
 D:\workbase\family\platforms\android\assets\www\app\templates\user.tpl.html \
+D:\workbase\family\platforms\android\assets\www\app\widget\topnav.js \
 D:\workbase\family\platforms\android\assets\www\lib\av \
 D:\workbase\family\platforms\android\assets\www\lib\fastclick.js \
 D:\workbase\family\platforms\android\assets\www\lib\foundation \

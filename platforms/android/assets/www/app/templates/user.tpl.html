@@ -1,16 +1,11 @@
 <!--TEMPLATE_START:user-->
 <!--TEMPLATE_START:user_profile-->
-<div class="row">
-    <div class="small-8 small-offset-2 columns">
-        <div class="img-wrapper large">
+<div class="row" style="margin-top: 1rem">
+    <div class="small-4 columns">
             <img src="<%=(user.get('logo') ? user.get('logo').url() : 'app/styles/images/logo.png')%>" class="user-logo small-12" id="userlogo" />
-        </div>
     </div>
-</div>
-<div class="row">
-    <div class="small-12 column">
-        <form id="updateForm">
-            <div class="row">&nbsp;</div>
+    <div class="small-8 columns">
+        <form id="updateForm" class="small-12 columns">
             <div class="row">
                 <div class="small-12 columns">
                     <label>手机号码
@@ -22,12 +17,46 @@
                         <input type="text" placeholder="nick name" id="nick" value="<%=(user.get('nickname') || '')%>" />
                     </label>
                 </div>
-                <div class="small-12 columns">
-                    <button type="submit" id="btnSubmit" class="expand">保存</button>
-                </div>
             </div>
         </form>
     </div>
 </div>
+<hr>
+<div class="row">
+    <div class="small-12 columns">
+        <div class="row">
+            <div class="small-7 columns">
+                <h4 id="block-grid">照片墙</h4>
+            </div>
+            <div class="small-5 columns">
+                <a href="#" id="addPhotoBtn">添加照片</a>
+            </div>
+        </div>
+
+        <ul class="small-block-grid-4" id="photolist">
+            <% for(var i = 0, l = photos.length; i < l; i ++){ %>
+            <li><img class="th" src="<%=photos[i].get('img').url()%>"></li>
+            <% } %>
+        </ul>
+        
+    </div>
+</div>
 <!--TEMPLATE_END:user_profile-->
+    
+<!--TEMPLATE_START:user_info-->
+<div class="row">
+    <div class="small-6 columns">
+        <img src="<%=user.get('logo').url()%>" />
+    </div>
+    <div class="small-6 columns">
+        <span><%=user.get('nickname')%></span>
+    </div>
+</div>
+<ul class="small-block-grid-2" id="photolist">
+    <% for(var i = 0, l = photos.length; i < l; i ++){ %>
+    <li><img class="th" src="<%=photos[i].get('img').url()%>"></li>
+    <% } %>
+</ul>
+<!--TEMPLATE_END:user_info-->
+    
 <!--TEMPLATE_END:user-->

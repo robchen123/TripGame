@@ -1,7 +1,8 @@
 define('app/page/login', function(require){
 	var $ = require('$'),
 		Page = require('spa/core/basepage'),
-        UserModule = require('app/module/user');
+        UserModule = require('app/module/user'),
+        topnav = require('app/widget/topnav');
 	
 	var page = new Page({
 		id: 'login',
@@ -12,11 +13,20 @@ define('app/page/login', function(require){
 		this.redirect({action: 'login'});
 	}
 	
-	page.actionLogin = function(){
+	page.actionLogin = function(params){
+        topnav.setButton('right', 'save', function(){
+            $('#loginForm').submit();    
+        });
         page.bind('#loginForm', 'submit', function(){
             var phone = $('#phone').val(),
                 pwd = $('#pwd').val();
-            UserModule.login({phone: phone, pwd: pwd}, function(){});
+            UserModule.login({phone: phone, pwd: pwd}, function(){
+                if(params.back){
+                    page.redirect(params.back);
+                }else{
+                    page.redirect('feed');
+                }
+            });
             return false;
         });
     }

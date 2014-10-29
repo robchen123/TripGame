@@ -55,7 +55,8 @@ module.exports.metadata =
 {
     "org.apache.cordova.dialogs": "0.2.10",
     "org.apache.cordova.camera": "0.3.3",
-    "org.apache.cordova.splashscreen": "0.3.4"
+    "org.apache.cordova.splashscreen": "0.3.4",
+    "org.apache.cordova.geolocation": "0.3.10"
 }
 // BOTTOM OF METADATA
 });

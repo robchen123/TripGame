@@ -10,7 +10,7 @@ define('app/page/index', function(require){
 	});
 	
 	page.actionIndex = function(){
-		
+		this.redirect({id: 'feed'});
 	}
 	
 	return page;

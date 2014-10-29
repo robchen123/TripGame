@@ -10,6 +10,9 @@ define('app/hook/hooks/before_app_init', function(require){
     });
     
     $(document).ready(function(){
-        $('#page').height($(window).height() - $('#main-nav').height());    
+        $('#page').height($(window).height() - $('#main-nav').height() - $('#topnav').height());
+        FastClick.attach(document.body);
     });
+    
+    
 });

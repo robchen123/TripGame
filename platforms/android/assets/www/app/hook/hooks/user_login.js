@@ -10,10 +10,5 @@ define('app/hook/hooks/user_login', function(require){
         page.redirect({id: 'user', action: 'profile'});
     }else{
         $('.user-logo').attr('src', user.get('logo').url());
-        if(!user.get('family')){
-            page.redirect({id: 'member', action: 'join'});
-        }else{
-            page.redirect({id: 'feed'});
-        }
     }
 });
