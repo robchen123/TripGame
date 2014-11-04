@@ -11,8 +11,10 @@ define('app/hook/hooks/before_app_init', function(require){
     });
     
     $(document).ready(function(){
-        $('#page').height($(window).height() - $('#main-nav').height() - $('#topnav').height());
+        $('#page-wrapper').height($(window).height() - $('#main-nav').height() - $('#topnav').height());
         FastClick.attach(document.body);
+        
+        require('app/widget/iscroll');
     });
     
     document.addEventListener('deviceready', function(){

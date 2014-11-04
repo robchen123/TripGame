@@ -50,9 +50,10 @@
         <img src="<%=user.get('logo').url()%>" />
     </div>
     <div class="small-6 columns">
-        <div><%=user.get('nickname')%></div>
-        <div><a href="#">发消息</a></div>
-        <div><a href="#"><i class="fi-like"></i></a></div>
+        <div><%=user.get('nickname')%> <a href="#message/to?username=<%=user.get('nickname')%>" id="btnMsg"><i class="fi-mail"></i></a></div>
+        <div class="likes">
+            <a href="#" id="btnLike"><i class="fi-like"></i>(<span><%=(user.get('like') || 0)%></span>)</a>
+            <a href="#" id="btnDislike"><i class="fi-dislike"></i>(<span><%=(user.get('dislike') || 0)%></span>)</a></div>
     </div>
 </div>
 <div class="row">&nbsp;</div>

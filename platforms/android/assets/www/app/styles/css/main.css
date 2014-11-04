@@ -9,7 +9,7 @@
 #page {
     overflow-x: hidden;
     overflow-y: auto;
-    background-color: #eee;
+    -webkit-overflow-scrolling: touch;
 }
 
 #topnav h1 {
@@ -94,3 +94,12 @@ ul.list .feed-content {
     width: 100%;
     height: 100%;
 }
+
+.page-loading {
+    position: absolute;
+    z-index: 10000;
+    top: 45%;
+}
+
+.likes i , #btnMsg i {font-size: 1.8rem;}
+.likes a {margin-right: 1rem}

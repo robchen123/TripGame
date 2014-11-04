@@ -4,13 +4,16 @@ define('app/page/feed', function(require){
         BaiduAPI = require('app/module/baiduapi'),
         UserModule = require('app/module/user'),
         topnav = require('app/widget/topnav'),
-        cache = require('app/module/cache');
+        cache = require('app/module/cache'),
+        iscroll = require('app/widget/iscroll');
     
     var page = new Page({
         id: 'feed',
         title: '泡泡',
         load: function(){
-            
+            iscroll.onPullUp = function(){
+                page.redirect({refresh: 1, t: new Date().getTime()});
+            }
         },
         unload: function(){
             topnav.hideButton('right');
@@ -20,10 +23,10 @@ define('app/page/feed', function(require){
     page.actionIndex = function(params, done){
         topnav.setButton('right', 'add', 'feed/new');
         var feeds = cache.get(cache.KEYS.FEEDS);
-        if(feeds){
-            console.log(feeds);
+        if(feeds && !params.refresh){
             done({feeds: feeds});
         }else{
+            page.showLoading();
             var Feed = AV.Object.extend('Feed'),
                 query = new AV.Query(Feed);
             query.descending('time');
@@ -32,6 +35,7 @@ define('app/page/feed', function(require){
             query.find().then(function(rs){
                 cache.set(cache.KEYS.FEEDS, rs, 86400000);
                 done({feeds: cache.get(cache.KEYS.FEEDS)});
+                page.hideLoading();
             });
         }
     }
@@ -48,9 +52,10 @@ define('app/page/feed', function(require){
             return false;
         }
         var feeds = cache.get(cache.KEYS.NEAR_FEEDS);
-        if(feeds){
+        if(feeds && !params.refresh){
             done({feeds: feeds});    
         }else{
+            page.showLoading();
             var Feed = AV.Object.extend('Feed'),
             query = new AV.Query(Feed);
             query.include('user');
@@ -58,6 +63,7 @@ define('app/page/feed', function(require){
             query.find().then(function(rs){
                 cache.set(cache.KEYS.NEAR_FEEDS, rs, 86400000);
                 done({feeds: cache.get(cache.KEYS.NEAR_FEEDS)});
+                page.hideLoading();
             });
         }
     }
@@ -71,6 +77,7 @@ define('app/page/feed', function(require){
         if(!params.refresh && feeds){
             done({feeds: feeds});
         }else{
+            page.showLoading();
             var Feed = AV.Object.extend('Feed'),
                 query = new AV.Query(Feed);
             query.descending('createdAt');
@@ -81,6 +88,7 @@ define('app/page/feed', function(require){
             query.find().then(function(rs){
                 cache.set(cache.KEYS.MY_FEEDS, rs, 86400000);
                 done({feeds: cache.get(cache.KEYS.MY_FEEDS)});
+                page.hideLoading();
             });
         }
     }
@@ -124,6 +132,7 @@ define('app/page/feed', function(require){
             return false;
         }
         page.bind('#feedForm', 'submit', function(){
+            page.showLoading();
             var time = $('#time').val(),
                 city = $('#city').val(),
                 desc = $('#desc').val();
@@ -142,12 +151,15 @@ define('app/page/feed', function(require){
                     feed.set('desc', desc);
                     feed.save().then(function(){
                         cache.clear(cache.KEYS.MY_FEEDS);
+                        page.hideLoading();
                         page.redirect({action: 'my'});
                     }, function(error){
-                        navigator.notification.alert("Error: " + error.code + " " + error.message, '错误');    
+                        navigator.notification.alert("Error: " + error.code + " " + error.message, '错误');
+                        page.hideLoading();
                     });
                 }else{
                     navigator.notification.alert('地址不存在，请填写正确地址', '地址错误'); 
+                    page.hideLoading();
                 }
             });
             return false;

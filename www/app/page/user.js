@@ -2,7 +2,8 @@ define('app/page/user', function(require){
     var $ = require('$'),
         Page = require('spa/core/basepage'),
         UserModule = require('app/module/user'),
-        topnav = require('app/widget/topnav');
+        topnav = require('app/widget/topnav'),
+        cache = require('app/module/cache');
     
     var page = new Page({
         id: 'user',
@@ -60,7 +61,8 @@ define('app/page/user', function(require){
     };
     
     page.actionInfo = function(params, done){
-        var username = params.username;
+        var username = params.username,
+            targetUser;
         if(!username){
             return false;   
         }
@@ -70,17 +72,46 @@ define('app/page/user', function(require){
             var Photo = AV.Object.extend('Photo'),
                 query = new AV.Query(Photo),
                 user = users[0];
+            targetUser = user;
             query.equalTo('user', user);
             query.limit(100);
             query.find().then(function(rs){
                 done({user: user, photos: rs});
             });
         });
+        
+        page.bind('#btnLike', 'click', function(){
+            var liked = cache.get(cache.KEYS.LIKES) || {};
+            if(liked[targetUser.get('username')] === 1){
+                return false;    
+            }
+            liked[targetUser.get('username')] = 1;
+            cache.set(cache.KEYS.LIKES, liked, 86400000);
+            
+            targetUser.increment('like');
+            targetUser.save();
+            $('#btnLike span').text(parseInt($('#btnLike span').html(), 10) + 1);
+            return false;
+        });
+        
+        page.bind('#btnDislike', 'click', function(){
+            var liked = cache.get(cache.KEYS.LIKES) || {};
+            if(liked[targetUser.get('username')] === 1){
+                return false;    
+            }
+            liked[targetUser.get('username')] = 1;
+            cache.set(cache.KEYS.LIKES, liked, 86400000);
+            
+            targetUser.increment('dislike');
+            targetUser.save();
+            $('#btnDislike span').text(parseInt($('#btnDislike span').html(), 10) + 1);
+            return false;
+        });
     }
     
     page.addPhoto = function(){
        if(!UserModule.checkLogin()){
-            return false;    
+            return false;
         }
         navigator.camera.getPicture(function(imgdata){
             var file = new AV.File('pic.jpg', {base64: imgdata});

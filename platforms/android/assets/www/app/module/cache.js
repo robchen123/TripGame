@@ -46,7 +46,8 @@ define('app/module/cache', function(){
         POSITION:   'cache_position',
         FEEDS:      'cache_feeds',
         NEAR_FEEDS: 'cache_near_feeds',
-        MY_FEEDS:   'cache_my_feeds'
+        MY_FEEDS:   'cache_my_feeds',
+        LIKED:      'cache_liked'
     }
     
     return Cache;

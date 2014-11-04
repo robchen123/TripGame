@@ -29,7 +29,10 @@
             </div>
         </nav>
     </div>
-    <div class="row">
+    <div class="row page-loading" style="display:none;">
+        <div class="small-2 small-offset-5 columns"><img src="app/styles/images/loading.gif" /></div>
+    </div>
+    <div class="row" id="page-wrapper">
         <div id="page" class="small-12 columns"></div>
     </div>
     <div class="icon-bar five-up" id="main-nav">
@@ -54,7 +57,7 @@
     <script type="text/javascript" src="sea.config.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript">
-        seajs.use(['$', 'lib/foundation/js/foundation.min.js', 'lib/av/av.js', 'lib/fastclick.js', 'app/app']);
+        seajs.use(['$', 'lib/foundation/js/foundation.min.js', 'lib/av/av.js', 'lib/fastclick.js', 'lib/iscroll.js','app/app']);
     </script>
 </body>
 

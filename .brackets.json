@@ -12,6 +12,9 @@
         "D:/workbase/family/www/spa/core/basepage.js",
         "D:/workbase/family/www/spa/lib/template.js",
         "D:/workbase/family/www/spa/core/tploader.js",
-        "D:/workbase/family/www/lib/fastclick.js"
+        "D:/workbase/family/www/lib/fastclick.js",
+        "D:/workbase/family/platforms/android/assets/www/sea.config.js",
+        "D:/workbase/family/www/lib/foundation/js/foundation.min.js",
+        "D:/workbase/family/www/lib/iscroll-infinite.js"
     ]
 }
